@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="public/next.svg" alt="RapidAlert Logo" width="120" height="120" />
+  <h1>RapidAlert WB</h1>
+  <p><strong>A Real-Time Crisis Response & Incident Management System for West Bengal Hospitality</strong></p>
+</div>
 
-## Getting Started
+---
 
-First, run the development server:
+## 🚨 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**RapidAlert WB** is a production-grade, full-stack web application built to streamline emergency reporting and crisis management for hospitality venues (hotels, resorts) across West Bengal, India. It provides a seamless interface for guests and staff to report incidents, while offering a powerful, real-time dashboard for response teams to triage, track, and resolve emergencies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The platform is designed with a premium, vibrant **"Light-Slate" glassmorphism UI**, optimized for high visibility during critical scenarios.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* **Public Incident Reporting**: Guests can report emergencies instantly without logging in. The system captures exact coordinates based on the selected property.
+* **Real-Time Staff Dashboard**: A live-syncing Kanban-style dashboard for responders and admins, featuring real-time statistics (Active Incidents, Critical Issues, Resolving).
+* **AI-Powered Triage**: Integrates **Google Gemini AI** to automatically classify incoming reports, assign a severity score (1-5), and suggest immediate recommended actions.
+* **Live Map Visualizations**: Uses the **Google Maps JavaScript API** to dynamically plot incident locations with severity-color-coded markers.
+* **Role-Based Access Control**: Secure, auto-provisioning login system with distinct roles (`admin`, `staff`, `responder`).
+* **Real-Time Database**: Fully powered by **Firebase Firestore** with `onSnapshot` listeners to ensure all staff see updates instantly without refreshing.
+* **Multilingual Support**: Integrated language toggle for English and Bengali (বাংলা).
 
-## Learn More
+## 🛠️ Technology Stack & Tools Used
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend & UI
+* **[Next.js 14](https://nextjs.org/)**: React framework using the modern App Router for optimized routing and server-side rendering.
+* **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework used for the custom vibrant glassmorphism design system.
+* **[shadcn/ui](https://ui.shadcn.com/)**: Accessible, customizable UI components.
+* **[Framer Motion](https://www.framer.com/motion/)**: For smooth micro-animations and page transitions.
+* **[Recharts](https://recharts.org/)**: Composable charting library used in the Analytics dashboard.
+* **[Lucide React](https://lucide.dev/)**: Clean, modern iconography.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend & Infrastructure
+* **[Firebase Firestore](https://firebase.google.com/products/firestore)**: NoSQL real-time database for instantaneous data syncing across all clients.
+* **[Firebase Authentication](https://firebase.google.com/products/auth)**: Secure email/password authentication system.
+* **[Vercel](https://vercel.com/)**: Cloud platform for seamless serverless deployment and hosting.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### APIs & AI Integrations
+* **[Google Gemini 1.5 Flash](https://deepmind.google/technologies/gemini/)**: Advanced Large Language Model (LLM) used via the Gemini API to parse unstructured crisis descriptions, categorize risks, and generate response plans.
+* **[Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview)** (`@react-google-maps/api`): For rendering interactive maps and dynamic property geolocation markers.
+* **[Zustand](https://zustand-demo.pmnd.rs/)**: Lightweight, fast state-management tool utilized with `persist` middleware for robust client-side state caching.
 
-## Deploy on Vercel
+## 🚀 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prerequisites
+* Node.js 18+
+* A Firebase Project (with Firestore and Authentication enabled)
+* A Google Cloud Project (with Maps JavaScript API and Gemini API enabled)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/YourUsername/rapidalert-wb.git
+   cd rapidalert-wb
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Environment Variables:**
+   Create a `.env.local` file in the root directory and add your API keys:
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   
+   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
+   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 👥 Usage Guide
+
+### 1. Reporting an Emergency
+Navigate to `/report`. Fill out the required details, select the affected property, describe the crisis, and submit. The Gemini AI will process the report and generate a tracking ID.
+
+### 2. Staff Portal & Login
+Navigate to `/login`. Use the robust Tabs interface to Sign In or Create an Account. 
+* *Note: Using an email containing `admin` or `responder` during registration will auto-assign those respective roles for demo purposes.*
+
+### 3. Dashboard Management
+Once logged in, navigate to `/dashboard`. You will see all active incidents. Click **"Assign to Me"** to claim an incident (updates status to "Responding"). Click **"View Details"** to see the Google Map location, AI analysis, and to log incident notes.
+
+---
+*Built with ❤️ for rapid response and safety.*
